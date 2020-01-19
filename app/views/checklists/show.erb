@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<div class="header"><h2>Data for This Checklist:</h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+			</nav>
+		</div>
+			<div id = "metadata">
+				<% if Location.find_by_id(@checklist.location_id) %>
+ 					<%location = Location.find_by_id(@checklist.location_id) %>
+ 				<p><span class="label">Location:</span> <span class="info"><%= location.name %></span></p>
+				<% end %>
+				<p><span class="label">Start Time:</span> <span class = "info"><%= @checklist.start_time.to_s[11..-8] %></span></p>
+				<p><span class="label">End Time:</span> <span class="info"><%= @checklist.end_time.to_s[11..-8] %></span></p>
+				<p><span class="label">Temperature:</span> <span class="info"><%= @checklist.temperature %> degrees Celsius</span></p>
+				<p><span class=label>Weather:</span> <span class="info"><%= @checklist.weather %></span></p>
+			</div>
+		<div id="birds"><h3>Birds Seen:</h3></div>
+		<div id = "sightings">
+			<% @checklist.sightings.each_with_index do |sighting, index| %>
+				<% bird = Bird.find(sighting.bird_id) %>
+				<p><%= index + 1 %>. <%= bird.common_name %> --- <i><%=bird.latin_name%></i> <a href="/birds/<%= bird.id %>">More About This Bird</a></p>
+			<% end %>
+		</div>
+	</body>
+</html>

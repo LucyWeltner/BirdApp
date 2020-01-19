@@ -1,0 +1,40 @@
+<html>	
+	<head>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+		<title>Bird World</title>
+	</head>
+	<body>
+		<div class="header">
+		<% if @checklists.length == 0 %>
+			<h2>You Haven't Submitted Any Checklists</h2>
+		<% else %>
+			<h2>Your Checklists</h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+			</nav></div>
+			<% @checklists.each_with_index do |checklist, index| %>
+				<div id="metadata">
+				<h3>Checklist #<%= index + 1 %></h3> 
+				<% location = Location.find_by_id(checklist.location_id) %>
+				<% if location %>
+					<p><span class="label">Location:</span> <span class="info"><%= location.name %></span></p>
+				<%end%>
+				<p><span class="label">Start Time:</span> <span class="info"><%= checklist.start_time.to_s[11..-8] %></span></p>
+				<p><span class="label">End Time:</span> <span class="info"><%= checklist.end_time.to_s[11..-8] %></span></p>
+				<p><span class="label">Weather:</span> <span class="info"><%= checklist.weather %></span></p>
+				<p><span class="label">Temperature:</span> <span class="info"><%= checklist.temperature %></span></p></div>
+				<div id="sightings"><p><a href = "checklists/<%= checklist.id %>">View Sightings</a></p>
+					<form method = "GET" action = "/checklists/<%= checklist.id %>/edit">
+						<input type = "submit" value = "Edit This Checklist">
+					</form>
+					<form method = "POST" action = "/checklists/<%= checklist.id %>">
+						<input type = "hidden" id = "hidden" name = "_method" value = "DELETE">
+						<input type = "submit" value = "Delete This Checklist" id = "delete">
+					</form>
+				</div>
+			<% end %>
+		<% end %>
+	</body>
+</html>

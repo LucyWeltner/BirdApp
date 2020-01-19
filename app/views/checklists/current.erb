@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<h2>Checklist Data:</h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+			</nav>
+			<div id = "metadata">
+				<p><span class="label">Location:</span> <span class="info"><%= @checklist.location.name %></span></p>
+				<p><span class="label">Start Time:</span> <span class = "info"><%= @checklist.start_time.to_s[11..-8] %></span></p>
+				<p><span class="label">End Time:</span> <span class="info"><%= @checklist.end_time.to_s[11..-8] %></span></p>
+				<p><span class="label">Temperature:</span> <span class="info"><%= @checklist.temperature %> degrees Celsius</span></p>
+				<p><span class=label>Weather:</span> <span class="info"><%= @checklist.weather %></span></p>
+			</div>
+		<div id="birds"><h3>Birds Seen:</h3></div>
+		<div id = "sightings">
+			<% @checklist.sightings.each do |sighting| %>
+				<% bird = Bird.find_by_id(sighting.bird_id) %>
+				<p><%= bird.common_name %> --- <i><%=bird.latin_name%></i> <a href="/birds/<%= bird.id %>">More About This Bird</a></p>
+			<% end %>
+		</div>
+		<div id="your_checklists"><a href = "/checklists">View or Edit Your Checklists</a></div>
+	</body>
+</html>
+

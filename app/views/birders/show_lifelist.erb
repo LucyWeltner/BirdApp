@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<div class="header"><h2><%= @found.name %>'s Lifelist</h2></div>
+			<div id = "metadata">
+				<p><span class="label">Total Birds Seen:</span> <span class="info"><%= @birds.length %></span></p>
+			</div>
+		<div id="birds"><h3>Species:</h3></div>
+		<div id = "sightings">
+			<% @birds.each_with_index do |bird, index| %>
+				<p><%=index+1%>. <%= bird.common_name %> --- <i><%=bird.latin_name%></i> <a href="/birds/<%= bird.id %>">More About This Bird</a></p>
+			<% end %>
+		</div>
+		<div id="your_checklists"><a href = "/checklists">View or Edit Your Checklists</a></div>
+	</body>
+</html>

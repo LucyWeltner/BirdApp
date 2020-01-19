@@ -1,0 +1,50 @@
+
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+	<body>
+		<% location = Location.find_by_id(@checklist.location_id) %>
+		<% if location %>
+			<p>Location: <%= location.name %></p>
+		<% end %>
+
+		<h3> Current Sightings: </h3>
+		<% @checklist.sightings.each_with_index do |sighting, index| %>
+			<% bird = Bird.find(sighting.bird_id) %>
+			<p><%= index + 1 %>. <%= bird.common_name + " " %>
+			<i><%= bird.latin_name %></i></p>
+		<% end %>
+
+		<h3> Add New Birds </h3>
+		<div id="sightings">
+		<p>Check the birds you would like to add.</p>
+		<% region = Region.find_by_id(location.region_id) %>
+		<% birds = Bird.all.select{|bird| bird.regions.include?(region)} %>
+		<% Bird::BIRD_TYPES.each do |group| %>
+			<% birds_in_group = birds.select{|bird| bird.grouping == group} %>
+			<% if birds_in_group.length > 0 %>
+				<h3><%= group %></h3>
+				<% birds_in_group.each_with_index do |bird, index| %>
+					<p><form method = "POST" action = "/checklists/<%= @checklist.id %>">
+					<input type = "hidden" id = "hidden" name = "_method" value = "PATCH">
+					<input type = "checkbox" name = "birds[]" value = "<%= bird.id %>">
+					<%= index + 1 %>. <%= bird.common_name + " " %>
+					<i><%= bird.latin_name %></i></p>
+				<% end %>
+			<% end %>
+		<% end %>
+		<br>
+		<input type = "submit" value = "Submit changes">
+		</form></p>
+	</div>
+	</body>
+</html>
+
+
+
+	
+
+
+

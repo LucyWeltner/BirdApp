@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+	<body>
+		<div class="header">
+			<h2>Search for a Location</h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+				<a href = '/'>Home</a>
+			</nav>
+		</div>
+		<p></p>
+		<form method = "POST", action = "/locations/results">
+			<p><span class = "label"><label for="local_query">Search for a location:</label></span></p>
+			<input type = "text" name = "local_query" placeholder="Search for a location">
+			<input type = "submit" id = "submit_query">
+		</form>
+		
+	</body>
+</html>

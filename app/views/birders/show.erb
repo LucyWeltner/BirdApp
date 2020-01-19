@@ -1,0 +1,10 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+	<body>
+	<div class="header"><h2>Info About <%= @found.name %> </h2>
+		<nav><a href = '/birders/<%= @found.id %>/checklists'>See This User's Checklists</a><a href = '/birders/<%= @found.id %>/lifelist'>See This User's Lifelist</a><a href = '/'>Back to Homepage</a></nav></div>
+	</body>
+</html>

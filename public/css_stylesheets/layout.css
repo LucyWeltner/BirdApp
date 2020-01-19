@@ -1,0 +1,111 @@
+			body {
+				background: rgb(200, 230, 120);
+			}
+
+			div.header {
+				background: rgb(232, 160, 82);
+				height: 80px;
+				background-position: center;
+				background-size: cover;
+			}
+
+			div.left-align {
+				align-content: right;
+				right: 100px;
+			}
+
+			div#homepage_header {
+				height: 220px;
+				background-image: url("https://nestwatch.org/wp-content/uploads/2012/04/TRES_Barb-728x494.png");
+				background-repeat: no-repeat;
+				background-size: auto;
+				background-position: left;
+			}
+
+			div#metadata {
+				clear: both;
+				padding: 0px 40px;
+			}
+
+			div#sightings {
+				padding: 0px 80px;
+				color: rgb(100,120,70);
+			}
+
+			div#description {
+				clear: both;
+			}
+
+			div#birds {
+				margin: 0px 100px;
+			}
+
+
+			div#your_checklists {
+				padding-left: 80px;
+				align-content: center;
+			}
+
+			span.label {
+				color: rgb(100,10,80);
+				font-family: Times New Roman, serif;
+				font-size: 18px;
+				font-weight: bold;
+				position: relative;
+				left: 15px;
+			}
+
+			span.info {
+				font-style: italic;
+				color: rgb(162, 105, 30);
+				position: relative;
+				left: 15px;
+			}
+
+			span#latin {
+				font-size: .85em;
+				font-family: Times New Roman, serif;
+			}
+
+			a:visited {
+				color: rgb(170, 170, 10);
+			}
+
+			a:link {
+				color: rgb(170, 170, 10);
+			}
+
+			nav {
+				align-content: center; 
+			}
+
+			nav a {
+				background: rgb(100,10,80);
+				float: left;
+				padding: 10px 10px;
+				margin: 30px 10px;
+				text-align: center;
+				font-family: Apple Symbols;
+			}
+
+			h1 {
+				color: rgb(206, 146, 8);
+				position: relative;
+    			top: 15px;
+   	 			left: 40px;
+   	 			font-family: Georgia;
+			}
+
+			h2 { 
+				color: rgb(120, 70, 230); 
+				font-family: Georgia, serif;
+				font-size: 30px;
+				position: relative;
+				left: 140px;
+				top: 20px;
+			}
+			h3 {
+				font-weight: bold;
+				color: rgb(100,0,30);
+			}
+			

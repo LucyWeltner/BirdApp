@@ -1,0 +1,8 @@
+<h2>Failure - Please Try Again</h2>
+<p></p>
+<h3>Here are the errors you got:</h3>
+	<% @errors.each_with_index do |error, index| %>
+		<p><%= index+1 %>. <%= error[0] %> <%= error[1] %></p>
+	<% end %>
+
+

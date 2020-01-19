@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+	<!-- Signup Page -->
+	<body>
+		<div class="header"><h2>Sign Up</h2></div>
+
+		<form method = "POST" action = "/birders/new">
+			<p><span class="label"><label for = "birder[name]">Enter Username:</label></span>
+			<span class = "info"><input type = "text" name = "birder[name]" required></span></p>
+			<p><span class = "label"><label for = "birder[email]">Enter Email:</label></span>
+			<span class = "info"><input type = "email" name = "birder[email]" required></span></p>
+			<p><span class ="label"><label for = "birder[password]">Enter Password:</label></span>
+			<span class = "info"><input type = "password" name = "birder[password]" required></span></p>
+			<br>
+			<input type = "submit" value = "Create New User">
+		</form>
+	</body>
+</html>

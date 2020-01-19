@@ -1,0 +1,28 @@
+<html>	
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<div class = "header"><h2>Results:</h2>
+		<nav><a href = '/checklists'>Your Checklists</a>
+			<a href = '/checklists/new'>New Checklist</a>
+			<a href = '/birders/profile'>Profile</a>
+			<a href = '/locations/search'>Search Locations</a>
+			<a href = '/'>Home</a>
+		</nav></div>
+		<% if @locals.length == 0 %>
+			<h2>No Locations Match Your Search</h2>
+		<% else %>
+			<% @locals.each_with_index do |local, index| %>
+				<div id="metadata">
+					<h3><%= index+1 %>. <%= local.name %></h3>
+				<p><span class="label">Region:</span> <span class="info"><%= local.region.name %></span></p>
+				<p><span class="label">Checklists At This Location:</span> <span class="info"><%= local.checklists.length %></span></p>
+				<p><span class="label">Bird Count:</span> <span class="info"><%= local.birds.uniq.length %></span></p></div>
+				<div id="sightings"><p><a href = "/locations/<%= local.id %>">View Sightings and Checklists At This Location</a></p>
+				</div>
+			<% end %>
+		<% end %>
+	</body>
+</html>

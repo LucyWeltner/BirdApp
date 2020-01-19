@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+
+	<body>
+
+		<div class="header"><h2>Birds of <%= @region.name %></h2></div>
+
+	<form method = "POST" action = '/'>
+		<ol>
+			<% all_birds = Bird.all.select{|bird| bird.regions.include?(@region)} %>
+			<% Bird::BIRD_TYPES.each do |group| %>
+				<% birds_in_group = all_birds.select{|bird| bird.grouping == group} %>
+				<% if birds_in_group.length > 0 %>
+					<h3><%= group %></h3>
+				<% end %>
+				<% birds_in_group.each do |bird| %>
+					<input type = "checkbox" name = "birds[]" value = "<%= bird.common_name %>">
+					<%= bird.common_name %>
+					<i><%= bird.latin_name %></i>
+				<p>  </p>
+				<% end %>
+			<% end %>
+		</ol>
+		<input type = "submit" value = "Submit Your Checklist!">
+	</form>
+
+</body>
+
+</html>

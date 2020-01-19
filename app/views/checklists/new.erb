@@ -1,0 +1,45 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<div class="header"><h2>Tell Us About Your Birding Trip</h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+			</nav></div>
+		<div id="metadata">
+			<form method = "POST" action = "/checklists">
+				<label for="location"><span class="label">Where did you go birding?</span></label>
+				<span class="info"><input type = "text" name = "location" placeholder = "Enter Location" required></span>
+				<p><span class="label">In what region (state or country) did you go birding?</span> </p>
+				<span class = "info"><select name = "region" required>
+					<% @regions.each do |region| %>
+						<option value = <%= region.id %> selected> <%= region.name %></option>
+					<% end %>
+				</select></span>
+				<br>
+				<p><span class="label">When did you start birding?</span></p>
+				<span class = "info"><input type = "number" name = "start[hours]" min = "1" max = "12">:<input type = "number" name = "start[minutes]" min = "0" max = "59"><select name = "start[timeofday]"><option value = "am" selected>am</option><option value = "pm" selected>pm</option></select></span>
+				<p>  </p>
+				<p><span class="label">When did you stop birding?</span></p>
+				<span class = "info"><input type = "number" name = "stop[hours]" min = "1" max = "12">:<input type = "number" name = "stop[minutes]" min = "0" max = "59"><select name = "stop[timeofday]"><option value = "am" selected>am</option><option value = "pm" selected>pm</option></select></span>
+				<p>  </p>
+				<label for = "checklist[temperature]"><span class="label">In degrees celsius, what was the temperature?</span></label>
+				<span class= "info"><input type = "text" name = "checklist[temperature]" placeholder="Enter Temperature"></span>
+				<p>  </p>
+				<div .left-align>
+					<script type="text/javascript" id="WolframAlphaScript9d0bbb435db57b64859584c8e160a485" src="//www.wolframalpha.com/widget/widget.jsp?id=9d0bbb435db57b64859584c8e160a485"></script>
+				</div>
+				<p></p>
+				<p><span class="label">What was the weather like?</span></p>
+				<textarea name = "checklist[weather]" rows = "4" cols = "70"></textarea>
+				<br>
+				<br>
+				<input type = "submit" value = "Start A New Checklist">
+			</form>
+		</div>
+	</body>
+</html>

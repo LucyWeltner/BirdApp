@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css">
+	</head>
+	<body>
+		<div class="header">
+			<h2>Welcome to Your Profile, <%= @current_user.name %></h2>
+			<nav><a href = '/checklists'>See Your Checklists</a><a href = '/birders/<%= @current_user.id %>/lifelist'>Your Lifelist</a><a href = '/'>Home</a></nav>
+		</div>
+		<div id = "body">
+		</div>
+	</body>
+</html>

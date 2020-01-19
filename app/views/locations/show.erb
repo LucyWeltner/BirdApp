@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Bird World</title>
+		<link rel = "stylesheet" type = "text/css" href = "/css_stylesheets/layout.css" >
+	</head>
+	<body>
+		<div class="header"><h2>All Birds Seen At <%= @local.name %></h2>
+			<nav><a href = '/checklists'>Your Checklists</a>
+				<a href = '/checklists/new'>New Checklist</a>
+				<a href = '/birders/profile'>Profile</a>
+				<a href = '/locations/search'>Search Locations</a>
+			</nav></div>
+			<div id = "metadata">
+				<p><span class="label">Total Birds Seen:</span> <span class="info"><%= @birds.length %></span></p>
+			</div>
+		<div id="birds"><h3>Species:</h3></div>
+		<div id = "sightings">
+			<% @birds.each_with_index do |bird, index| %>
+				<p><%=index+1%>. <%= bird.common_name %> --- <i><%=bird.latin_name%></i> <a href="/birds/<%= bird.id %>">More About This Bird</a></p>
+				<p>Number of Times Seen: <% bird_ids = @local.birds.map{|b| b.id} %> <%= bird_ids.count(bird.id) %>
+			<% end %>
+		<h3>Recent Checklists Submitted For This Location:</h3>
+			<% if @local.checklists.length > 10 %>
+				<% checklists = @local.checklists[0..9] %>
+			<% else %>
+				<% checklists = @local.checklists %>
+			<% end %>
+			<% checklists.each_with_index do |checklist, index| %>
+				<p><%= index+1 %>. Checklist by <a href = "/birders/<%= checklist.birder_id %>"><%= checklist.birder.name %></a></p>
+				<p><a href = "checklists/<% checklist.id %>">See Sightings Associated With This Checklist</a></p></p>
+			<% end %>
+		</div>
+	</body>
+</html>
