@@ -15,7 +15,7 @@ class LocationController < ApplicationController
 		@local = Location.find_by_id(params[:id])
 		if @local 
 			@birds = @local.birds.uniq
-			if @local.checklists > 10
+			if @local.checklists.length > 10
 				@checklists = @local.checklists[0..9]
 			else 
 				@checklists = @local.checklists
