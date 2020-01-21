@@ -13,8 +13,13 @@ class LocationController < ApplicationController
 
 	get '/locations/:id' do
 		@local = Location.find_by_id(params[:id])
-		@birds = @local.birds.uniq
-		erb :'locations/show'
+		if @local 
+			@birds = @local.birds.uniq
+			erb :'locations/show'
+		else 
+			@errors = [["There is no location with this ID."]]
+			erb :'failed_login'
+		end
 	end
 
 end
