@@ -1,3 +1,5 @@
+#NOTE: rake db:seed will timeout if you run all the code in this file. Comment out everything after line 103, then run rake db:seed. Then, comment out lines 68-102 and run the rest of the code.
+
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
