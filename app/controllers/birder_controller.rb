@@ -1,6 +1,7 @@
 
 require_relative '../../config/environment'
 class BirderController < ApplicationController
+
 		get '/birders/new' do
   		if !is_logged_in?(session)
   		  erb :'birders/new'
@@ -27,7 +28,7 @@ class BirderController < ApplicationController
   			session[:birder_id] = birder.id
   			redirect '/'
   		else 
-        @errors = [["Username or password does not exist"]]
+        @errors = [["Username does not exist or password is incorrect."]]
   			erb :'failed_login'
   		end
   	end
@@ -37,7 +38,7 @@ class BirderController < ApplicationController
   			@current_user = Birder.find_by_id(session[:birder_id])
   			erb :'birders/profile'
   		else 
-        @errors = [["You are not logged in!"]]
+        @errors = [["You are not logged in. Please log in or sign up to see your profile."]]
   			erb :'failed_login'
   		end
   	end
@@ -52,7 +53,7 @@ class BirderController < ApplicationController
   				erb :'birders/show'
   			end
   		else
-        @errors = [["There is no user with this ID"]]
+        @errors = [["There is no user with this ID."]]
   			erb :'failed_login'
   		end
   	end
@@ -67,7 +68,7 @@ class BirderController < ApplicationController
   				erb :'birders/show_checklists'
   			end
   		else
-        @errors = [["There is no checklist with this ID"]]
+        @errors = [["There is no checklist with this ID."]]
   			erb :'failed_login'
   		end
   	end
@@ -82,7 +83,7 @@ class BirderController < ApplicationController
   				erb :'birders/show_lifelist'
   			end
   		else 
-        @errors = [["There is no user with this ID"]]
+        @errors = [["There is no user with this ID."]]
   			erb :'failed_login'
   		end 
   	end 
