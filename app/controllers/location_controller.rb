@@ -15,6 +15,11 @@ class LocationController < ApplicationController
 		@local = Location.find_by_id(params[:id])
 		if @local 
 			@birds = @local.birds.uniq
+			if @local.checklists > 10
+				@checklists = @local.checklists[0..9]
+			else 
+				@checklists = @local.checklists
+			end
 			erb :'locations/show'
 		else 
 			@errors = [["There is no location with this ID."]]
