@@ -20,12 +20,7 @@
 				<p>Number of Times Seen: <% bird_ids = @local.birds.map{|b| b.id} %> <%= bird_ids.count(bird.id) %>
 			<% end %>
 		<h3>Recent Checklists Submitted For This Location:</h3>
-			<% if @local.checklists.length > 10 %>
-				<% checklists = @local.checklists[0..9] %>
-			<% else %>
-				<% checklists = @local.checklists %>
-			<% end %>
-			<% checklists.each_with_index do |checklist, index| %>
+			<% @checklists.each_with_index do |checklist, index| %>
 				<p><%= index+1 %>. Checklist by <a href = "/birders/<%= checklist.birder_id %>"><%= checklist.birder.name %></a></p>
 				<p><a href = "checklists/<% checklist.id %>">See Sightings Associated With This Checklist</a></p></p>
 			<% end %>
