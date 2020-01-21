@@ -2,8 +2,12 @@
 require_relative '../../config/environment'
 class BirderController < ApplicationController
 		get '/birders/new' do
-  		# if !is_logged_in?(session)
-  		erb :'birders/new'
+  		if !is_logged_in?(session)
+  		  erb :'birders/new'
+      else
+        @errors = [["You cannot sign up...you are already logged in!"]]
+        erb :'failed_login'
+      end
   	end
 
   	post '/birders/new' do
