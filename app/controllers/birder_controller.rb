@@ -35,7 +35,7 @@ class BirderController < ApplicationController
 
   	get '/birders/profile' do 
   		if is_logged_in?(session)
-  			@current_user = Birder.find_by_id(session[:birder_id])
+  			@current_user = current_birder(session)
   			erb :'birders/profile'
   		else 
         @errors = [["You are not logged in. Please log in or sign up to see your profile."]]
@@ -44,7 +44,7 @@ class BirderController < ApplicationController
   	end
 
   	get '/birders/:id' do 
-  		@found = Birder.find_by_id(params[:id])
+  		@found = find_birder(params)
   		if @found
   			if @found.id == session[:birder_id]
   				@current_user = @found
@@ -59,7 +59,7 @@ class BirderController < ApplicationController
   	end
 
   	get '/birders/:id/checklists' do 
-  		found = Birder.find_by_id(params[:id])
+  		found = find_birder(params)
   		if found
   			@checklists = found.checklists
   			if found.id == session[:birder_id]
@@ -74,7 +74,7 @@ class BirderController < ApplicationController
   	end
 
   	get '/birders/:id/lifelist' do 
-  		@found = Birder.find_by_id(params[:id])
+  		@found = find_birder(params)
   		if @found
   			@birds = @found.birds.uniq
   			if @found.id == session[:birder_id]

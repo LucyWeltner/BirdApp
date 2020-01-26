@@ -11,11 +11,10 @@ class ApplicationController < Sinatra::Base
   	end
 
   	get '/' do 
-  		if session[:birder_id] && Birder.find_by_id(session[:birder_id])
-  			@current_user = Birder.find_by_id(session[:birder_id])
+  		if is_logged_in?(session)
+  			@current_user = current_birder(session)
   			erb :homepage
   		else
-  			puts Birder.find_by_id(session[:birder_id])
   			erb :index
   		end
   	end 
@@ -40,13 +39,22 @@ class ApplicationController < Sinatra::Base
   	end
 
 	helpers do
-		def is_logged_in?(session_hash)
-			if session_hash[:birder_id] && Birder.find_by_id(session_hash[:birder_id])
-				return true 
-			else 
-				return false
+		def find_birder(hash)
+			Birder.find_by_id(hash[:id])
+		end
+
+		def current_birder(session_hash)
+			if session_hash[:birder_id]
+				Birder.find_by_id(session_hash[:birder_id])
+			else
+				false
 			end
 		end
+
+		def is_logged_in?(session_hash)
+			!!current_birder(session_hash)
+		end
+
 		def convert_time(param_hash)
 			if param_hash[:timeofday] == "pm"
 				param_hash[:hours] = (param_hash[:hours].to_i + 12).to_s

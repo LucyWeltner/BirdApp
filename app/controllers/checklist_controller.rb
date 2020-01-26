@@ -3,12 +3,8 @@ require_relative '../../config/environment'
 class ChecklistController < ApplicationController
 	get '/checklists' do 
 		if is_logged_in?(session)
-			@checklists = Checklist.all.select{|checklist| checklist.birder_id == session[:birder_id]}
-			if @checklists == nil
-				puts "no checklists"
-			else 
-				erb :'/checklists/index'
-			end
+			@checklists = current_birder(session).checklists
+			erb :'/checklists/index'
 		end
 	end
 
@@ -64,9 +60,17 @@ class ChecklistController < ApplicationController
 
 	get '/checklists/:id/edit' do 
 		@checklist = Checklist.find_by_id(params[:id])
-		erb :'checklists/edit'
+		if @checklist 
+			@birder = current_birder(session)
+			if @birder.checklists.find_by_id(@checklist.id)
+				erb :'checklists/edit'
+			else 
+				@errors = [["You cannot edit a checklist you did not make."]] 
+				erb :'failed_login'
+			end 
+		else 
+			@errors = [["There is no checklist with this ID."]] 
+			erb :'failed_login'
+		end
 	end
-	# post '/checklists' do 
-	# 	erb :'/checklists/index'
-	# end
 end
