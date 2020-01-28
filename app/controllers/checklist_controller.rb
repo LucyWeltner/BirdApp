@@ -1,5 +1,4 @@
 
-require_relative '../../config/environment'
 class ChecklistController < ApplicationController
 	get '/checklists' do 
 		if is_logged_in?(session)
@@ -43,11 +42,17 @@ class ChecklistController < ApplicationController
 
 	patch '/checklists/:id' do
 		@checklist = Checklist.find_by_id(params[:id])
-		params[:birds].each do |birds_id|
-			if !Sighting.find_by({checklist_id: @checklist.id, bird_id: birds_id})
-				Sighting.create({checklist_id: @checklist.id, bird_id: birds_id})
+		if params[:birds].empty?
+			@errors = [["You must submit a bird in order to edit."]]
+			redirect "/checklists/#{@checklist.id}/edit"
+		else
+			params[:birds].each do |birds_id|
+				if !Sighting.find_by({checklist_id: @checklist.id, bird_id: birds_id})
+					Sighting.create({checklist_id: @checklist.id, bird_id: birds_id})
+				end
 			end
 		end
+		# redirect "/checklists/#{@checklist.id}"
 		erb :'checklists/show'
 	end
 
