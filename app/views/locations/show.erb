@@ -22,7 +22,7 @@
 		<h3>Recent Checklists Submitted For This Location:</h3>
 			<% @checklists.each_with_index do |checklist, index| %>
 				<p><%= index+1 %>. Checklist by <a href = "/birders/<%= checklist.birder_id %>"><%= checklist.birder.name %></a></p>
-				<p><a href = "checklists/<% checklist.id %>">See Sightings Associated With This Checklist</a></p></p>
+				<p><a href = "/checklists/<%= checklist.id %>">See Sightings Associated With This Checklist</a></p></p>
 			<% end %>
 		</div>
 	</body>
